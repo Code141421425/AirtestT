@@ -7,7 +7,7 @@ import random
 auto_setup(__file__)
            
     
-    
+#位置坐标记录
 pos = {
     #其他系统按钮位置
     'p_missonIn':[1519, 340],
@@ -36,14 +36,67 @@ pos = {
     'p2':[676, 721]
     
 }
+
+randomCirt = 60
+
+#技能释放顺序
+skface1 = ["sk1_1","sk2_1","sk3_1"]
+skface2 = ["skM_2","sk2_3","sk3_2"]
+skface3 = ["sk1_3","sk3_3","sk2_2"]
+
+#所有技能
+class sk(object): 
+    def sk1_1():
+        touch(randomPos(pos["sk1_1"],1))#sk11
+        s_SkipShort()
+
+    def sk2_1():
+        touch(randomPos(pos["sk2_1"],1))#sk21
+        touch(randomPos(pos["actorChoice1"],1))#ac
+        s_SkipShort()
+
+    def sk3_1():    
+        touch(randomPos(pos["sk3_1"],1))#sk31
+        touch(randomPos(pos["actorChoice1"],1))#ac1
+        s_SkipShort()
+        
+    def skM_2():
+        touch(randomPos(pos["masterSkill"],1))#msk
+        sleep(0.9)
+        touch(randomPos(pos["skM_2"],1))#msk2
+        touch(randomPos(pos["actorChoice1"]))#ac1
+        s_SkipShort()
+    
+    def sk2_3():
+        touch(randomPos(pos["sk2_3"]))#sk23
+        touch(randomPos(pos["actorChoice1"]))#ac1
+        s_SkipShort()
+    
+    def sk3_2():
+        touch(randomPos(pos["sk3_2"]))#sk32
+        s_SkipShort()
+        
+    def sk1_3():
+        touch(randomPos(pos["sk1_3"],1))#sk13
+        touch(randomPos(pos["actorChoice1"]))#atc
+        s_SkipShort()
+        
+    def sk2_2():
+        touch(randomPos(pos["sk2_2"]))#sk22
+        s_SkipShort()
+        
+    def sk3_3():
+        touch(randomPos(pos["sk3_3"]))#sk33
+        touch(randomPos(pos["actorChoice1"]))#atc
+        s_SkipShort()
+
 #基础
 
 def w_mainCity():
     try:
         wait(Template(r"tpl1579247357625.png", record_pos=(-0.242, -0.043), resolution=(2244, 1080)))
     except:
-        print("执行中断")
-        break
+        return false
     else:
         pass
 
@@ -102,7 +155,19 @@ def randomTime(tarTime,scale = 1,customTime = 0):
 def randomAttackChoice():
     pass
 
-def randomSkillChoice():
+## 随机释放不影响顺序的技能
+def randomSkillChoice(face,):
+    pass
+
+def randomIfRandom():
+    rint = random.randint(0,100)
+    
+    if rint < randomCirt:
+        reslut = True
+    else:
+        reslut = False
+
+    return reslut
     
      
 #步骤
@@ -124,59 +189,55 @@ def helpChoice():
 def missionStart():
     sleep(randomTime(2))
     touch(randomPos(exists(Template(r"tpl1579257639809.png", record_pos=(0.34, 0.208), resolution=(2244, 1080))),1))
-    sleep(10)
+    sleep(15)
 
 def firstBattle():
     w_attack()
-    touch(randomPos (pos["sk1_1"],1))#sk11
-    s_SkipShort()
-    touch(randomPos(pos["sk2_1"],1))#sk21
-    touch(randomPos(pos["actorChoice1"],1))#ac
-    s_SkipShort()
-    touch(randomPos(pos["sk3_1"],1))#sk31
-    touch(randomPos(pos["actorChoice1"],1))#ac1
-    s_SkipShort()
+    
+    if randomIfRandom():
+        random.shuffle(skface1)    
+    for func in skface1:
+        getattr(sk,func)()
+        
     touch(randomPos(pos["attack"],1))#atk
     Attack()
-  
+
 def secondBattle():
     w_attack()
-    touch(randomPos(pos["masterSkill"],1))#msk
-    sleep(0.9)
-    touch(randomPos(pos["skM_2"],1))#msk2
-    touch(randomPos(pos["actorChoice1"]))#ac1
-    s_SkipShort()
-    touch(randomPos(pos["sk2_3"]))#sk23
-    touch(randomPos(pos["actorChoice1"]))#ac1
-    s_SkipShort()
-    touch(randomPos(pos["sk3_2"]))#sk32
-    s_SkipShort()
+    
+    if randomIfRandom():
+        random.shuffle(skface2)
+    for func in skface2:
+        getattr(sk,func)()
+        
     touch(randomPos(pos["attack"]))#atk
     Attack()
     
 def thirdBattle_T():
     w_attack()
-    touch(randomPos(pos["sk1_3"],1))#sk13
-    touch(randomPos(pos["actorChoice1"]))#atc
-    s_SkipShort()
-    touch(randomPos(pos["sk2_2"]))#sk22
-    s_SkipShort()
-    touch(randomPos(pos["sk3_3"]))#sk33
-    touch(randomPos(pos["actorChoice1"]))#atc
-    s_SkipShort()
+    
+    if randomIfRandom():
+        random.shuffle(skface3)
+    for func in skface3:
+        getattr(sk,func)()
+
     touch(randomPos(pos["attack"]))#atk
     s_SkipShort()
     Attack()
     
-
 def finish():
     w_finish()
     touch(randomPos(pos["fin2"],2))#t
     sleep(randomTime(3))#
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(3))
+    sleep(randomTime(1))
     touch(Template(r"tpl1579234188020.png", record_pos=(0.283, 0.209), resolution=(2244, 1080)))#tnx #卡点#
     sleep(randomTime(20,3))
+    
+def newFriednAdd():
+    exists(Template(r"tpl1579326259995.png", record_pos=(-0.027, -0.098), resolution=(2244, 1080)))
+    touch(Template(r"tpl1579326288526.png", record_pos=(-0.23, 0.168), resolution=(2244, 1080)))
+
            
 def __main__():
     #appIn()
@@ -190,11 +251,15 @@ def __main__():
 
 
 def __test__():
+    print(skface1List)
+    random.shuffle(skface1List)
+    for func in skface1List:
+        getattr(sk,func)()
+    print(skface1List)
     #helpChoice()
     #print(randomTime(5,))
-    pass
 
-#__main__()
+__main__()
 #__test__()
 
 ##设置
