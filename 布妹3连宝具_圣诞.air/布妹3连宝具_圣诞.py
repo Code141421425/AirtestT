@@ -251,8 +251,12 @@ def finish():
     sleep(randomTime(20,3))
     
 def newFriednAdd():
-    exists(Template(r"tpl1579326259995.png", record_pos=(-0.027, -0.098), resolution=(2244, 1080)))
-    touch(Template(r"tpl1579326288526.png", record_pos=(-0.23, 0.168), resolution=(2244, 1080)))
+    try:
+        w_mainCity()
+    except:
+        exists(Template(r"tpl1579326259995.png", record_pos=(-0.027, -0.098), resolution=(2244, 1080)))
+        touch(Template(r"tpl1579326288526.png", record_pos=(-0.23, 0.168), resolution=(2244, 1080)))
+    
 
            
 def __main__():
@@ -264,16 +268,19 @@ def __main__():
     secondBattle()
     thirdBattle_T()
     finish()
+    newFriednAdd()
 
 
 def __test__():
-    print(skface1List)
-    random.shuffle(skface1List)
-    for func in skface1List:
-        getattr(sk,func)()
-    print(skface1List)
+#     print(skface1List)
+#     random.shuffle(skface1List)
+#     for func in skface1List:
+#         getattr(sk,func)()
+#     print(skface1List)
     #helpChoice()
     #print(randomTime(5,))
+#     newFriednAdd()
+    pass
 
 #__main__()
 #__test__()
