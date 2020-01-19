@@ -37,14 +37,17 @@ pos = {
     
 }
 
-randomCirt = 60
+randomCirt = 60#随机释放技能的概率
 
 #技能释放顺序
 skface1 = ["sk1_1","sk2_1","sk3_1"]
-skface2 = ["skM_2","sk2_3","sk3_2"]
-skface3 = ["sk1_3","sk3_3","sk2_2"]
+skface2 = ["skM_2","sk2_3","sk2_2"]
+skface3 = ["sk1_3","sk3_3","sk3_2"]
 
 #所有技能
+
+
+
 class sk(object): 
     def sk1_1():
         touch(randomPos(pos["sk1_1"],1))#sk11
@@ -53,6 +56,7 @@ class sk(object):
     def sk2_1():
         touch(randomPos(pos["sk2_1"],1))#sk21
         touch(randomPos(pos["actorChoice1"],1))#ac
+        
         s_SkipShort()
 
     def sk3_1():    
@@ -155,8 +159,8 @@ def randomTime(tarTime,scale = 1,customTime = 0):
 def randomAttackChoice():
     pass
 
-## 随机释放不影响顺序的技能
 def randomSkillChoice(face,):
+    ## 随机释放不影响顺序的技能
     pass
 
 def randomIfRandom():
@@ -174,17 +178,28 @@ def randomIfRandom():
 def missionIn():
     touch(randomPos(pos['p_missonIn'],1))
     sleep(3)
+    try:
+        wait(Template(r"tpl1579427939294.png", threshold=0.85, record_pos=(0.313, -0.217), resolution=(2244, 1080)),timeout = 8)
+    except:
+        wait(Template(r"tpl1579427986763.png", record_pos=(-0.02, -0.195), resolution=(2244, 1080)))
+        touch(randomPos([1110, 473]))
+        sleep(1.5)
+        touch(randomPos([1381, 835]))
+        sleep(3)
+
 
 def helpChoice():
-    if exists(Template(r"tpl1579246556618.png", record_pos=(-0.361, 0.028), resolution=(2244, 1080))) != False:#存在斯卡迪
-        a = exists(Template(r"tpl1579246556618.png", record_pos=(-0.361, 0.028), resolution=(2244, 1080)))
-        print(a)
+    wait(Template(r"tpl1579427939294.png", threshold=0.85, record_pos=(0.313, -0.217), resolution=(2244, 1080)))
+    a = exists(Template(r"tpl1579246556618.png", threshold=0.85, record_pos=(-0.361, 0.028), resolution=(2244, 1080)))
+
+    if a != False:#存在斯卡迪
         touch(randomPos(a,1))
     else:
         touch([1393, 198])#列表刷新
-        touch()#
-    
-    pass
+        sleep(1.5)
+        touch([1381, 841])#
+        touch(Template(r"tpl1579246556618.png", threshold=0.85, record_pos=(-0.361, 0.028), resolution=(2244, 1080)))
+
 
 def missionStart():
     sleep(randomTime(2))
@@ -228,9 +243,10 @@ def thirdBattle_T():
 def finish():
     w_finish()
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(3))#
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(1))
+    sleep(randomTime(2))#
+    touch(randomPos(pos["fin2"],2))#t
+    sleep(randomTime(1.5))
     touch(Template(r"tpl1579234188020.png", record_pos=(0.283, 0.209), resolution=(2244, 1080)))#tnx #卡点#
     sleep(randomTime(20,3))
     
@@ -259,7 +275,7 @@ def __test__():
     #helpChoice()
     #print(randomTime(5,))
 
-__main__()
+#__main__()
 #__test__()
 
 ##设置
