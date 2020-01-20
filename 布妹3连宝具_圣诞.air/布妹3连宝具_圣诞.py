@@ -31,13 +31,13 @@ pos = {
     'sk3_3':[1444, 859],
     'skM_2':[1599, 460],
     #卡牌位置
-    'pb1':[723, 286],
-    'p1':[300, 729],
-    'p2':[676, 721]
-    
+    'pb1':[723, 286]
 }
 
 randomCirt = 60#随机释放技能的概率
+randomAttackCrit = 30
+attackPos = [[300, 729],[676, 721],[1081, 733],[1460, 725],[1848, 708]]
+
 
 #技能释放顺序
 skface1 = ["sk1_1","sk2_1","sk3_1"]
@@ -120,8 +120,8 @@ def Attack():
     sleep(randomTime(2,1))
     
     touch(randomPos(pos["pb1"],1))#b1
-    touch(randomPos(pos["p1"],1))#p1
-    touch(randomPos(pos["p2"],1))#p2
+    sleep(randomTime(1.2))
+    randomAttackChoice()
     
     s_turnEnd()
     
@@ -157,16 +157,18 @@ def randomTime(tarTime,scale = 1,customTime = 0):
     return tarTime
 
 def randomAttackChoice():
-    pass
+    if randomIfRandom(randomAttackCrit):
+        a = random.sample(attackPos,2)
+    else:
+        a = attackPos
+        
+    touch(randomPos(a[0]))
+    touch(randomPos(a[1]))
 
-def randomSkillChoice(face,):
-    ## 随机释放不影响顺序的技能
-    pass
-
-def randomIfRandom():
+def randomIfRandom(randomIn):
     rint = random.randint(0,100)
     
-    if rint < randomCirt:
+    if rint < randomIn:
         reslut = True
     else:
         reslut = False
@@ -179,7 +181,7 @@ def missionIn():
     touch(randomPos(pos['p_missonIn'],1))
     sleep(3)
     try:
-        wait(Template(r"tpl1579427939294.png", threshold=0.85, record_pos=(0.313, -0.217), resolution=(2244, 1080)),timeout = 8)
+        wait(Template(r"tpl1579427939294.png", threshold=0.85, record_pos=(0.313, -0.217), resolution=(2244, 1080)),timeout = 4)
     except:
         wait(Template(r"tpl1579427986763.png", record_pos=(-0.02, -0.195), resolution=(2244, 1080)))
         touch(randomPos([1110, 473]))
@@ -209,7 +211,7 @@ def missionStart():
 def firstBattle():
     w_attack()
     
-    if randomIfRandom():
+    if randomIfRandom(randomCirt):
         random.shuffle(skface1)    
     for func in skface1:
         getattr(sk,func)()
@@ -220,7 +222,7 @@ def firstBattle():
 def secondBattle():
     w_attack()
     
-    if randomIfRandom():
+    if randomIfRandom(randomCirt):
         random.shuffle(skface2)
     for func in skface2:
         getattr(sk,func)()
@@ -231,7 +233,7 @@ def secondBattle():
 def thirdBattle_T():
     w_attack()
     
-    if randomIfRandom():
+    if randomIfRandom(randomCirt):
         random.shuffle(skface3)
     for func in skface3:
         getattr(sk,func)()
@@ -246,7 +248,7 @@ def finish():
     touch(randomPos(pos["fin2"],2))#t
     sleep(randomTime(2))#
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(1.5))
+    sleep(randomTime(2))
     touch(Template(r"tpl1579234188020.png", record_pos=(0.283, 0.209), resolution=(2244, 1080)))#tnx #卡点#
     sleep(randomTime(20,3))
     
@@ -280,6 +282,7 @@ def __test__():
     #helpChoice()
     #print(randomTime(5,))
 #     newFriednAdd()
+#   Attack()
     pass
 
 #__main__()
@@ -288,3 +291,4 @@ def __test__():
 ##设置
 for i in range(6):
     __main__()
+    print("====================="+str(i)+"=====================")
