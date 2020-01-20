@@ -36,6 +36,7 @@ pos = {
 
 randomCirt = 60#随机释放技能的概率
 randomAttackCrit = 30
+randomSleepCrit = 5
 attackPos = [[300, 729],[676, 721],[1081, 733],[1460, 725],[1848, 708]]
 
 
@@ -246,9 +247,9 @@ def finish():
     w_finish()
     touch(randomPos(pos["fin2"],2))#t
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(2))#
+    sleep(randomTime(2.5))#
     touch(randomPos(pos["fin2"],2))#t
-    sleep(randomTime(2))
+    sleep(randomTime(2.2))
     touch(Template(r"tpl1579234188020.png", record_pos=(0.283, 0.209), resolution=(2244, 1080)))#tnx #卡点#
     sleep(randomTime(20,3))
     
@@ -289,6 +290,6 @@ def __test__():
 #__test__()
 
 ##设置
-for i in range(6):
+for i in range(2):
     __main__()
     print("====================="+str(i)+"=====================")
