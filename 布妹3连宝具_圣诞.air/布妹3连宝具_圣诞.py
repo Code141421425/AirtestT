@@ -41,9 +41,9 @@ attackPos = [[300, 729],[676, 721],[1081, 733],[1460, 725],[1848, 708]]
 
 
 #技能释放顺序
-skface1 = ["sk1_1","sk2_1","sk3_1"]
-skface2 = ["skM_2","sk2_3","sk2_2"]
-skface3 = ["sk1_3","sk3_3","sk3_2"]
+skface1 = ["sk2_1","sk3_1","sk2_2"]
+skface2 = ["skM_2","sk1_3","sk3_3"]
+skface3 = ["sk3_2","sk2_3"]
 
 #所有技能
 
@@ -264,14 +264,14 @@ def newFriednAdd():
            
 def __main__():
     #appIn()
-    missionIn()
-    helpChoice()
+#     missionIn()
+#     helpChoice()
     missionStart()
     firstBattle()
     secondBattle()
     thirdBattle_T()
     finish()
-    newFriednAdd()
+#    newFriednAdd()
 
 
 def __test__():
@@ -286,10 +286,10 @@ def __test__():
 #   Attack()
     pass
 
-#__main__()
+__main__()
 #__test__()
 
 ##设置
-for i in range(2):
-    __main__()
-    print("====================="+str(i)+"=====================")
+# for i in range(2):
+#     __main__()
+#     print("====================="+str(i)+"=====================")
