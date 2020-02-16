@@ -23,8 +23,9 @@ pos = {
 
 
 #基础数值
-battleDuration = 180
+battleDuration = 130
 battleSleep = 180
+times = 7
 
 
 
@@ -99,6 +100,6 @@ def __main__():
     pass
 
 
-for i in range(7):
+for i in range(times):
     __main__()
     print("=============="+str(i)+"==============")
